@@ -9,7 +9,6 @@ Ces procédures sont destinées à être utilisées avec Amazon Linux 2.
 + [Pre-requis](#hosting-wordpress-prereqs)
 + [Installation de wordpress](#install-wordpress)
 + [Les étapes à suivres](#wordpress-next-steps)
-+ [Help\! My public DNS name changed and now my blog is broken](#wordpress-troubleshooting)
 
 ## Pre-requis<a name="hosting-wordpress-prereqs"></a>
 
