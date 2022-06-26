@@ -8,7 +8,6 @@ Ces procédures sont destinées à être utilisées avec Amazon Linux 2.
 **Topics**
 + [Pre-requis](#hosting-wordpress-prereqs)
 + [Installation de wordpress](#install-wordpress)
-+ [Les étapes à suivres](#wordpress-next-steps)
 
 ## Pre-requis<a name="hosting-wordpress-prereqs"></a>
 
