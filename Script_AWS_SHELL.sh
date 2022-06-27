@@ -1,3 +1,4 @@
+
 AWS_REGION=$(aws ec2 describe-availability-zones --output text --query 'AvailabilityZones[0].[RegionName]')
 VPC_NAME="AWS_VPC_TP"
 VPC_CIDR=""
@@ -5,7 +6,9 @@ SUBNET_PUBLIC_CIDR="10.0.1.0/24"
 SUBNET_PUBLIC_AZ=$AWS_REGION"a"
 SUBNET_PUBLIC_NAME="10.0.1.0 - "$AWS_REGION"a"
 KEY_NAME=""
-IMAGE_ID=""
+IMAGE_ID="ami-0c5599c53178a7d77"
+INSTANCE_NAME=""
+AWS_TYPE=""
 
 echo "Creation VPC"
 VPC_ID=$(aws ec2 create-vpc \
@@ -34,7 +37,7 @@ GROUP_ID=$(aws ec2 create-security-group \
     --vpc-id $VPC_ID\
     --output text )
 
-echo "Le groupe de sécurité a été créé avec l'id "$GROUP_ID
+echo 'Le groupe de sécurité a été créé avec l id '$GROUP_ID
 
 aws ec2 authorize-security-group-ingress \
     --group-id $GROUP_ID \
@@ -50,6 +53,15 @@ aws ec2 authorize-security-group-ingress \
 
 echo 'Les règles ont été ajoutées'
 
+echo 'Veuillez entrer le nom de votre instance : '
+read INSTANCE_NAME
+
+aws ec2 create-tags \
+    --resources i-1234567890abcdef0 \
+    --tags Key= , Value=$INSTANCE_NAME
+
+echo 'Le nom de l instance est '$INSTANCE_NAME
+
 INSTANCE_ID=$(aws ec2 run-instances \
     --image-id $IMAGE_ID \
     --count 1 \
@@ -60,6 +72,12 @@ INSTANCE_ID=$(aws ec2 run-instances \
     --user-data file://script_deploiement.sh | sudo  jq '.Instances[0].InstanceId' | sed -e 's/^"//' -e 's/"$//' )
 
 echo "L'instance est lancée sous l'ID "$INSTANCE_ID
+
+echo 'Entrez le type d instance que vous voulez : '
+
+read AWS_TYPE
+source ./change_ec2_instance_type.sh
+./change_ec2_instance_type -i $INSTANCE_ID -t $AWS_TYPE
 
 INSTANCE_IP=$(aws ec2 describe-instances \
     --instance-ids $INSTANCE_ID \
