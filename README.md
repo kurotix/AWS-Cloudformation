@@ -87,7 +87,7 @@ Le dossier d'installation de WordPress contient un exemple de fichier de configu
       ```
       define('DB_PASSWORD', 'your_strong_password');
       ```
-   4. Save the file and exit your text editor\.
+   4. Sauvegarder le fichier et quitter l'éditeur de texte\.
 
 **Autoriser WordPress à utiliser des permaliens**
 
@@ -216,7 +216,7 @@ Amazon Linux 2\.
    [ec2-user ~]$ chmod +x wp-cli.phar
    [ec2-user ~]$ sudo mv wp-cli.phar /usr/local/bin/wp  
   ```
-  5. Si WP-CLI a été installé correctement, nous devons obtenir le résultat suivant quand nous executons: wp --info
+  4. Si WP-CLI a été installé correctement, nous devons obtenir le résultat suivant quand nous executons: wp --info
     ```
    [ec2-user ~]$ wp --info
   OS:	Ubuntu 20.04
